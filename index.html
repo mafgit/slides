@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <button class="left-btn slide-btn">
+        <img src="./caret-left-solid.svg" alt="" />
+      </button>
+      <div id="slide-1" class="slide in-view">
+        <img
+          src="https://images.unsplash.com/photo-1672243777342-0698e84a41fc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+          alt="img"
+        />
+
+        <div class="right-to-img">
+          <h1>Lorem, ipsum.</h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam,
+            architecto.
+          </p>
+        </div>
+      </div>
+
+      <div id="slide-2" class="slide on-right">
+        <img
+          src="https://images.unsplash.com/photo-1627791157058-14bf988dee38?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+          alt="img"
+        />
+        <div class="right-to-img">
+          <h1>Lorem ipsum dolor sit amet.</h1>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        </div>
+      </div>
+
+      <div id="slide-3" class="slide on-right">
+        <img
+          alt="img"
+          src="https://images.unsplash.com/photo-1686291260108-78b6758e876c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80"
+        />
+        <div class="right-to-img">
+          <h1>Lorem, ipsum dolor.</h1>
+          <p>Lorem ipsum dolor sit amet.</p>
+        </div>
+      </div>
+      <div class="slide-dots">
+        <span id="dot-1" class="active"></span>
+        <span id="dot-2"></span>
+        <span id="dot-3"></span>
+      </div>
+      <button class="right-btn slide-btn">
+        <img src="./caret-right-solid.svg" alt="" />
+      </button>
+    </div>
+
+    <script>
+      const $ = (el) => document.querySelector(el);
+      const $$ = (el) => document.querySelectorAll(el);
+
+      const SLIDES = 3;
+      let slideNum = 1;
+
+      handleSlideBtns();
+
+      $$(".slide-btn").forEach((btn) => {
+        btn.onclick = (e) => onSlideBtnClick(e);
+      });
+
+      function onSlideBtnClick(e) {
+        let newSlide;
+        let thisSlide = $(`#slide-${slideNum}`);
+
+        handleSlideBtns(false);
+
+        if (e.target.classList.contains("right-btn") && slideNum < SLIDES) {
+          // move right
+          newSlide = $(`#slide-${++slideNum}`);
+          thisSlide.classList.remove("in-view");
+          thisSlide.classList.add("move-this-left");
+          newSlide.classList.add("move-new-left");
+          setTimeout(() => {
+            newSlide.classList.remove("on-right");
+            thisSlide.classList.remove("move-this-left");
+            newSlide.classList.remove("move-new-left");
+            thisSlide.classList.add("on-left");
+            newSlide.classList.add("in-view");
+          }, 800);
+        } else if (e.target.classList.contains("left-btn") && slideNum > 0) {
+          newSlide = $(`#slide-${--slideNum}`);
+          thisSlide.classList.remove("in-view");
+          thisSlide.classList.add("move-this-right");
+          newSlide.classList.add("move-new-right");
+          setTimeout(() => {
+            newSlide.classList.remove("move-new-right");
+            newSlide.classList.remove("on-left");
+            thisSlide.classList.remove("move-this-right");
+            thisSlide.classList.add("on-right");
+            newSlide.classList.add("in-view");
+          }, 800);
+        } else return;
+
+        handleSlideBtns();
+        handleSlideDots();
+      }
+
+      function handleSlideBtns(show = true) {
+        if (!show) {
+          $(".right-btn").style.display = "none";
+          $(".left-btn").style.display = "none";
+          return;
+        }
+        if (slideNum == SLIDES) {
+          $(".right-btn").style.display = "none";
+          $(".left-btn").style.display = "block";
+        } else if (slideNum == 1) {
+          $(".right-btn").style.display = "block";
+          $(".left-btn").style.display = "none";
+        } else {
+          $(".right-btn").style.display = "block";
+          $(".left-btn").style.display = "block";
+        }
+      }
+
+      function handleSlideDots() {
+        $$(".slide-dots span").forEach((dot) => {
+          dot.classList.remove("active");
+        });
+
+        $(`#dot-${slideNum}`).classList.add("active");
+      }
+    </script>
+  </body>
+</html>
