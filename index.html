@@ -88,7 +88,7 @@
             newSlide.classList.remove("move-new-left");
             thisSlide.classList.add("on-left");
             newSlide.classList.add("in-view");
-          }, 800);
+          }, 500);
         } else if (e.target.classList.contains("left-btn") && slideNum > 0) {
           newSlide = $(`#slide-${--slideNum}`);
           thisSlide.classList.remove("in-view");
@@ -100,7 +100,7 @@
             thisSlide.classList.remove("move-this-right");
             thisSlide.classList.add("on-right");
             newSlide.classList.add("in-view");
-          }, 800);
+          }, 500);
         } else return;
 
         handleSlideBtns();

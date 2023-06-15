@@ -4,9 +4,16 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow: hidden;
+}
+
 body {
   overflow-x: hidden;
-  height: 100vh;
+  min-height: 100vh;
+  min-width: 100vw;
+  max-height: 100vh;
+  max-width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -84,6 +91,8 @@ body {
 .slide-btn img {
   width: 10px;
   pointer-events: none;
+  position: relative;
+  top: 2.5px;
 }
 
 .right-btn {
@@ -100,10 +109,12 @@ body {
 
 @keyframes slide-this-to-left {
   from {
+    transform: scale(1);
     left: 0;
   }
 
   to {
+    transform: scale(0);
     left: -300vh;
   }
 }
@@ -111,54 +122,60 @@ body {
 @keyframes slide-this-to-right {
   from {
     left: 0;
+    transform: scale(1);
   }
 
   to {
     left: 300vh;
+    transform: scale(0);
   }
 }
 @keyframes slide-new-to-left {
   from {
     left: 300vh;
+    transform: scale(0);
   }
 
   to {
     left: 0;
+    transform: scale(1);
   }
 }
 
 @keyframes slide-new-to-right {
   from {
+    transform: scale(0);
     left: -300vh;
   }
 
   to {
+    transform: scale(1);
     left: 0;
   }
 }
 
 .slide.move-this-right {
   animation-name: slide-this-to-right;
-  animation-duration: 0.8s;
+  animation-duration: 0.5s;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
 }
 
 .slide.move-this-left {
   animation-name: slide-this-to-left;
-  animation-duration: 0.8s;
+  animation-duration: 0.5s;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
 }
 .slide.move-new-right {
   animation-name: slide-new-to-right;
-  animation-duration: 0.8s;
+  animation-duration: 0.5s;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
 }
 .slide.move-new-left {
   animation-name: slide-new-to-left;
-  animation-duration: 0.8s;
+  animation-duration: 0.5s;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
 }
@@ -210,13 +227,13 @@ body {
 
 @media (max-width: 1250px) {
   .container {
-    width: 80%;
+    width: 80vw;
   }
 }
 
 @media (max-width: 950px) {
   .container {
-    width: 88%;
+    width: 88vw;
   }
 }
 
