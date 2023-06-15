@@ -6,11 +6,15 @@
 
 body {
   overflow-x: hidden;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .container {
-  margin: 10px auto;
-  width: 800px;
+  margin: auto;
+  width: 60%;
   height: 300px;
   position: relative;
   display: flex;
@@ -198,9 +202,54 @@ body {
 
 .slide:nth-child(odd) {
   flex-direction: row-reverse;
-  border-radius: 8px 0 0 8px;
 }
 
 .slide:nth-child(odd) img {
   border-radius: 0 8px 8px 0;
+}
+
+@media (max-width: 1250px) {
+  .container {
+    width: 80%;
+  }
+}
+
+@media (max-width: 950px) {
+  .container {
+    width: 88%;
+  }
+}
+
+@media (max-width: 780px) {
+  .container {
+    min-height: 600px;
+  }
+  .slide {
+    flex-direction: column !important;
+    text-align: center;
+  }
+
+  .slide-dots {
+    margin-top: 20px;
+  }
+
+  .slide img {
+    width: 100%;
+    min-height: 300px;
+    border-radius: 8px 8px 0 0 !important;
+  }
+
+  .slide:nth-child(odd) {
+    flex-direction: column;
+  }
+
+  .slide:nth-child(odd) img {
+    border-radius: 0 8px 8px 0;
+  }
+}
+
+@media (max-width: 375px) {
+  .slide .right-to-img {
+    padding: 10px 15px;
+  }
 }
